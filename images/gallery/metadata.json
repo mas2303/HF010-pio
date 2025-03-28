@@ -1,0 +1,21 @@
+{
+    "photos": [
+        {
+            "filename": "67e6c7e70b56b.jpg",
+            "title": "logo",
+            "category": "equipe",
+            "date": "2025-03-28 16:01:43",
+            "url": "images\/gallery\/67e6c7e70b56b.jpg",
+            "width": 1290,
+            "height": 1720
+        },
+        {
+            "filename": "67e6cd762612c.mp4",
+            "title": "carnaval",
+            "category": "activites",
+            "date": "2025-03-28 16:25:26",
+            "url": "images\/gallery\/67e6cd762612c.mp4",
+            "type": "video"
+        }
+    ]
+}

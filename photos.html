@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photos - Les Pios à l'île Maurice</title>
+    <link rel="icon" type="image/jpeg" href="images/header/logo.jpg">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <img src="images/header/logo.jpg" alt="Logo Pios">
+            <h1>Les Pios à l'île Maurice</h1>
+        </div>
+        <ul class="main-nav">
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="equipe.html">Équipe</a></li>
+            <li><a href="photos.html" class="active">Photos</a></li>
+        </ul>
+    </nav>
+
+    <div class="page-header">
+        <h1>Galerie Photos</h1>
+        <p>Partagez vos photos du camp avec nous !</p>
+    </div>
+
+    <section class="gallery-section">
+        <div class="upload-section">
+            <h2>Ajouter une photo</h2>
+            <form id="photoUploadForm" class="upload-form" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="photoTitle">Titre de la photo</label>
+                    <input type="text" id="photoTitle" name="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="photoCategory">Catégorie</label>
+                    <select id="photoCategory" name="category" required>
+                        <option value="paysages">Paysages</option>
+                        <option value="activites">Activités</option>
+                        <option value="equipe">Équipe</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="photoFile">Photo ou Vidéo</label>
+                    <input type="file" id="photoFile" name="photo" accept="image/*,video/mp4,video/webm,video/ogg" required>
+                    <small class="form-help">Formats acceptés : JPG, PNG, GIF, MP4, WEBM, OGG (max 50MB)</small>
+                </div>
+                <button type="submit" class="cta-button">Partager la photo</button>
+            </form>
+        </div>
+
+        <div class="gallery-filters">
+            <button class="filter-btn active" data-filter="all">Tout</button>
+            <button class="filter-btn" data-filter="paysages">Paysages</button>
+            <button class="filter-btn" data-filter="activites">Activités</button>
+            <button class="filter-btn" data-filter="equipe">Équipe</button>
+        </div>
+        <div class="gallery-grid" id="galleryGrid">
+            <!-- Les photos seront ajoutées ici dynamiquement -->
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Les Pios à l'île Maurice</h3>
+                <p>Une aventure inoubliable vous attend</p>
+            </div>
+            <div class="footer-section">
+                <h3>Suivez-nous</h3>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/PionnierDeStembert"><i class="fab fa-facebook"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Les Pios à l'île Maurice. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Fonction pour afficher un message de notification
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.classList.add('show');
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    setTimeout(() => {
+                        notification.remove();
+                    }, 300);
+                }, 3000);
+            }, 100);
+        }
+
+        // Fonction pour charger les photos depuis le serveur
+        async function loadPhotos() {
+            try {
+                const response = await fetch('get_photos.php');
+                const data = await response.json();
+                
+                if (data.success) {
+                    return data.photos;
+                } else {
+                    showNotification(data.message || 'Erreur lors du chargement des photos', 'error');
+                    return [];
+                }
+            } catch (error) {
+                console.error('Erreur lors du chargement des photos:', error);
+                showNotification('Erreur de connexion au serveur', 'error');
+                return [];
+            }
+        }
+
+        // Fonction pour afficher les photos dans la galerie
+        async function displayPhotos(photos = null) {
+            const galleryGrid = document.getElementById('galleryGrid');
+            const photosToDisplay = photos || await loadPhotos();
+            
+            galleryGrid.innerHTML = '';
+            
+            if (photosToDisplay.length === 0) {
+                galleryGrid.innerHTML = '<p class="no-photos">Aucun média disponible pour le moment</p>';
+                return;
+            }
+            
+            photosToDisplay.forEach(media => {
+                const mediaCard = document.createElement('div');
+                mediaCard.className = `gallery-item ${media.category}`;
+                
+                if (media.type === 'video') {
+                    mediaCard.innerHTML = `
+                        <video src="${media.url}" controls>
+                            Votre navigateur ne supporte pas la lecture de vidéos.
+                        </video>
+                        <div class="gallery-overlay">
+                            <h3>${media.title}</h3>
+                            <p class="photo-date">${new Date(media.date).toLocaleDateString()}</p>
+                            <button class="fullscreen-btn" onclick="openFullscreen('${media.url}', '${media.type}')">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                        </div>
+                    `;
+                } else {
+                    mediaCard.innerHTML = `
+                        <img src="${media.url}" alt="${media.title}" loading="lazy">
+                        <div class="gallery-overlay">
+                            <h3>${media.title}</h3>
+                            <p class="photo-date">${new Date(media.date).toLocaleDateString()}</p>
+                            <button class="fullscreen-btn" onclick="openFullscreen('${media.url}', '${media.type}')">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                        </div>
+                    `;
+                }
+                
+                galleryGrid.appendChild(mediaCard);
+            });
+        }
+
+        // Fonction pour ouvrir en plein écran
+        function openFullscreen(url, type) {
+            const modal = document.createElement('div');
+            modal.className = 'fullscreen-modal';
+            modal.innerHTML = `
+                <div class="fullscreen-content">
+                    ${type === 'video' 
+                        ? `<video src="${url}" controls autoplay></video>`
+                        : `<img src="${url}" alt="Image en plein écran">`
+                    }
+                    <button class="close-btn" onclick="this.parentElement.parentElement.remove()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        // Fonction pour gérer l'upload de photos
+        async function handlePhotoUpload(event) {
+            event.preventDefault();
+            
+            const form = event.target;
+            const submitButton = form.querySelector('button[type="submit"]');
+            const originalButtonText = submitButton.textContent;
+            
+            // Désactiver le bouton pendant l'upload
+            submitButton.disabled = true;
+            submitButton.textContent = 'Upload en cours...';
+            
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch('upload.php', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+                
+                if (result.success) {
+                    showNotification('Photo uploadée avec succès !');
+                    form.reset();
+                    displayPhotos();
+                } else {
+                    showNotification(result.message || 'Erreur lors de l\'upload', 'error');
+                }
+            } catch (error) {
+                console.error('Erreur lors de l\'upload:', error);
+                showNotification('Erreur de connexion au serveur', 'error');
+            } finally {
+                // Réactiver le bouton
+                submitButton.disabled = false;
+                submitButton.textContent = originalButtonText;
+            }
+        }
+
+        // Fonction pour filtrer les photos
+        async function filterPhotos(category) {
+            const photos = await loadPhotos();
+            const filteredPhotos = category === 'all' 
+                ? photos 
+                : photos.filter(photo => photo.category === category);
+            displayPhotos(filteredPhotos);
+        }
+
+        // Événements
+        document.addEventListener('DOMContentLoaded', () => {
+            displayPhotos();
+            
+            const uploadForm = document.getElementById('photoUploadForm');
+            uploadForm.addEventListener('submit', handlePhotoUpload);
+            
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    filterPhotos(button.dataset.filter);
+                });
+            });
+        });
+    </script>
+
+    <style>
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 2rem;
+            border-radius: 4px;
+            color: white;
+            font-weight: 500;
+            transform: translateX(120%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            background-color: #2ecc71;
+        }
+
+        .notification.error {
+            background-color: #e74c3c;
+        }
+
+        button[type="submit"]:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .gallery-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .gallery-item video::-webkit-media-controls {
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 0 0 8px 8px;
+        }
+
+        .form-help {
+            display: block;
+            margin-top: 0.5rem;
+            font-size: 0.875rem;
+            color: #666;
+        }
+
+        .fullscreen-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+
+        .fullscreen-btn:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .fullscreen-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .fullscreen-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90vh;
+        }
+
+        .fullscreen-content img,
+        .fullscreen-content video {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .close-btn:hover {
+            color: #ddd;
+        }
+    </style>
+</body>
+</html> 
