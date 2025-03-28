@@ -15,6 +15,11 @@
                 <img src="images/header/logo.jpg" alt="Logo Pios">
                 <h1>Les Pios à l'île Maurice</h1>
             </div>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
             <ul class="main-nav">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="equipe.html" class="active">Équipe</a></li>
@@ -24,75 +29,138 @@
     </header>
 
     <main>
-        <section class="page-header">
-            <h1>Notre Équipe</h1>
-            <p>Découvrez les membres de notre expédition</p>
+        <section class="team-hero">
+            <div class="hero-content">
+                <h1>Notre Équipe</h1>
+                <p>Découvrez les membres de notre expédition</p>
+            </div>
         </section>
 
         <section class="team-section">
             <div class="team-grid">
                 <div class="team-card leader">
-                    <img src="images/team/pierre.jpg" alt="Pierre Jungling">
-                    <h3>Pierre Jungling</h3>
-                    <p class="role">Chef d'expédition</p>
-                    <p class="description">D'origine Mauricienne, il sera notre guide tout au long du voyage.</p>
-                    <div class="member-social">
-                        <a href="https://www.instagram.com/pierrejungling/" class="instagram-button"><i class="fab fa-instagram"></i> Instagram</a>
+                    <div class="team-image">
+                        <img src="images/team/pierre.jpg" alt="Pierre Jungling">
+                        <div class="team-overlay">
+                            <div class="social-links">
+                                <a href="https://www.instagram.com/pierrejungling/" target="_blank">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-info">
+                        <h3>Pierre Jungling</h3>
+                        <p class="role">Chef d'expédition</p>
+                        <p class="description">D'origine Mauricienne, il sera notre guide tout au long du voyage.</p>
                     </div>
                 </div>
-                <div class="team-card">
-                    <img src="images/team/jaguarondi.jpg" alt="Jaguarondi">
-                    <h3>Jaguarondi</h3>
-                    <p class="role">Chef de troupe</p>
-                    <p class="description">Aillant déjà visité l'île Maurice, il accompagnera notre guide tout au long du voyage.</p>
-                    <div class="member-social">
-                        <a href="https://www.instagram.com/samuel_merenne/" class="instagram-button"><i class="fab fa-instagram"></i> Instagram</a>
-                    </div>
-                </div>
-                <div class="team-card">
-                    <img src="images/team/narval.jpg" alt="Narval">
-                    <h3>Narval</h3>
-                    <p class="role">Chef</p>
-                    <p class="description">Débordant d'idée il empechera les moments de blanc durant le voyage.</p>
-                    <div class="member-social">
-                        <a href="https://www.instagram.com/simondauvister/" class="instagram-button"><i class="fab fa-instagram"></i> Instagram</a>
-                    </div>
-                </div>
-                <div class="team-card">
-                    <img src="images/team/sika.jpg" alt="Sika">
-                    <h3>Sika</h3>
-                    <p class="role">Chef</p>
-                    <p class="description">Sa bonne humeur et son enthousiasme le rendront indispensable.</p>
-                    <div class="member-social">
-                        <a href="https://www.instagram.com/diegouille/" class="instagram-button"><i class="fab fa-instagram"></i> Instagram</a>
 
+                <div class="team-card">
+                    <div class="team-image">
+                        <img src="images/team/jaguarondi.jpg" alt="Jaguarondi">
+                        <div class="team-overlay">
+                            <div class="social-links">
+                                <a href="https://www.instagram.com/samuel_merenne/" target="_blank">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-info">
+                        <h3>Jaguarondi</h3>
+                        <p class="role">Chef de troupe</p>
+                        <p class="description">Aillant déjà visité l'île Maurice, il accompagnera notre guide tout au long du voyage.</p>
                     </div>
                 </div>
+
                 <div class="team-card">
-                    <img src="images/team/ecureuil.jpg" alt="Ecureuil">
-                    <h3>Ecureuil</h3>
-                    <p class="role">Pionnier</p>
-                    <p class="description">Prêt à découvrir la "culture" de l'île Maurice.</p>
-                    <div class="member-social">
-                        <a href="https://www.instagram.com/hugo.divita/" class="instagram-button"><i class="fab fa-instagram"></i> Instagram</a>
+                    <div class="team-image">
+                        <img src="images/team/narval.jpg" alt="Narval">
+                        <div class="team-overlay">
+                            <div class="social-links">
+                                <a href="https://www.instagram.com/simondauvister/" target="_blank">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-info">
+                        <h3>Narval</h3>
+                        <p class="role">Chef</p>
+                        <p class="description">Débordant d'idée il empechera les moments de blanc durant le voyage.</p>
                     </div>
                 </div>
+
                 <div class="team-card">
-                    <img src="images/team/cabri.jpg" alt="Cabri">
-                    <h3>Cabri</h3>
-                    <p class="role">Pionnier</p>
-                    <p class="description"> Prêt à nous faire rire tout au long du voyage.</p>
-                    <div class="member-social">
-                        <a href="https://www.instagram.com/max_manguette/" class="instagram-button"><i class="fab fa-instagram"></i> Instagram</a>
+                    <div class="team-image">
+                        <img src="images/team/sika.jpg" alt="Sika">
+                        <div class="team-overlay">
+                            <div class="social-links">
+                                <a href="https://www.instagram.com/diegouille/" target="_blank">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-info">
+                        <h3>Sika</h3>
+                        <p class="role">Chef</p>
+                        <p class="description">Sa bonne humeur et son enthousiasme le rendront indispensable.</p>
                     </div>
                 </div>
+
                 <div class="team-card">
-                    <img src="images/team/coronelle.jpg" alt="Coronelle">
-                    <h3>Coronelle</h3>
-                    <p class="role">Pionnier</p>
-                    <p class="description">Prêt à découvrir l'agriculture de Maurice.</p>
-                    <div class="member-social">
-                        <a href="https://www.instagram.com/jhndrcks/" class="instagram-button"><i class="fab fa-instagram"></i> Instagram</a>
+                    <div class="team-image">
+                        <img src="images/team/ecureuil.jpg" alt="Ecureuil">
+                        <div class="team-overlay">
+                            <div class="social-links">
+                                <a href="https://www.instagram.com/hugo.divita/" target="_blank">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-info">
+                        <h3>Ecureuil</h3>
+                        <p class="role">Pionnier</p>
+                        <p class="description">Prêt à découvrir la "culture" de l'île Maurice.</p>
+                    </div>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-image">
+                        <img src="images/team/cabri.jpg" alt="Cabri">
+                        <div class="team-overlay">
+                            <div class="social-links">
+                                <a href="https://www.instagram.com/max_manguette/" target="_blank">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-info">
+                        <h3>Cabri</h3>
+                        <p class="role">Pionnier</p>
+                        <p class="description">Prêt à nous faire rire tout au long du voyage.</p>
+                    </div>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-image">
+                        <img src="images/team/coronelle.jpg" alt="Coronelle">
+                        <div class="team-overlay">
+                            <div class="social-links">
+                                <a href="https://www.instagram.com/jhndrcks/" target="_blank">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-info">
+                        <h3>Coronelle</h3>
+                        <p class="role">Pionnier</p>
+                        <p class="description">Prêt à découvrir l'agriculture de Maurice.</p>
                     </div>
                 </div>
             </div>
@@ -116,5 +184,38 @@
             <p>&copy; 2024 Les Pios à l'île Maurice. Tous droits réservés.</p>
         </div>
     </footer>
+
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const mainNav = document.querySelector('.main-nav');
+        let isMenuOpen = false;
+
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            isMenuOpen = !isMenuOpen;
+            menuToggle.classList.toggle('active');
+            mainNav.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.main-nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                isMenuOpen = false;
+                menuToggle.classList.remove('active');
+                mainNav.classList.remove('active');
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('nav') && isMenuOpen) {
+                isMenuOpen = false;
+                menuToggle.classList.remove('active');
+                mainNav.classList.remove('active');
+            }
+        });
+
+        mainNav.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+    </script>
 </body>
 </html> 

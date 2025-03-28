@@ -9,10 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Date de départ (12 juillet 2024 à 12:00)
             const departureDate = new Date('2025-07-12T12:00:00').getTime();
 
-            // Mise à jour du compte à rebours chaque seconde
             const countdown = setInterval(function() {
                 const now = new Date().getTime();
                 const distance = departureDate - now;
@@ -27,7 +25,6 @@
                 document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
                 document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
 
-                // Si le compte à rebours est terminé
                 if (distance < 0) {
                     clearInterval(countdown);
                     document.querySelector('.countdown-container').innerHTML = '<h2>Nous sommes partis !</h2>';
@@ -106,12 +103,17 @@
     <header>
         <nav>
             <div class="logo">
-                <img src="images/header/logo.jpg" alt="Logo Pios">
-                <h1>Les Pios à l'île Maurice</h1>
+                <img src="images/header/logo.jpg" alt="Logo">
+                <h1>Les Pio à l'île Maurice</h1>
+            </div>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
             <ul class="main-nav">
                 <li><a href="index.html" class="active">Accueil</a></li>
-                <li><a href="equipe.html">Équipe</a></li>
+                <li><a href="equipe.html">Notre Équipe</a></li>
                 <li><a href="photos.html">Photos</a></li>
             </ul>
         </nav>
@@ -120,7 +122,7 @@
     <main>
         <section class="hero">
             <div class="hero-content">
-                <h2>Bienvenue dans notre Voyage Extraordinaire vers l'ile Maurice </h2>
+                <h2>Bienvenue dans notre Voyage Extraordinaire vers l'ile Maurice</h2>
                 <p>Une aventure unique à travers les merveilles de l'ile.</p>
                 <a href="#decouvrir" class="cta-button">Destination</a>
                 <a href="#itinerary" class="cta-button">Itinéraire</a>
@@ -151,7 +153,7 @@
         </section>
 
         <section id="decouvrir" class="destination">
-          <h2>Notre Destination</h2>
+            <h2>Notre Destination</h2>
             <div class="destination-content">
                 <div class="destination-text">
                     <p>Nous partons pour un voyage extraordinaire à travers les plus beaux endroits de l'ile. Notre itinéraire nous mènera des plages paradisiaques aux montagnes majestueuses, en passant par des villes historiques et des sites culturels exceptionnels.</p>
@@ -181,7 +183,7 @@
             <div class="itinerary-grid">
                 <div class="itinerary-card">
                     <div class="day-number">Jour 1-2</div>
-                    <h3>Décollage de Paris </h3>
+                    <h3>Décollage de Paris</h3>
                     <p>escale :</p>
                     <ul class="activities">
                         <li>Riyad</li>
@@ -260,5 +262,38 @@
             <p>&copy; 2024 les pios à l'ile Maurice. Tous droits réservés.</p>
         </div>
     </footer>
+
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const mainNav = document.querySelector('.main-nav');
+        let isMenuOpen = false;
+
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            isMenuOpen = !isMenuOpen;
+            menuToggle.classList.toggle('active');
+            mainNav.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.main-nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                isMenuOpen = false;
+                menuToggle.classList.remove('active');
+                mainNav.classList.remove('active');
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('nav') && isMenuOpen) {
+                isMenuOpen = false;
+                menuToggle.classList.remove('active');
+                mainNav.classList.remove('active');
+            }
+        });
+
+        mainNav.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+    </script>
 </body>
 </html> 

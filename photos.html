@@ -298,6 +298,107 @@
             color: #666;
         }
 
+        .upload-section {
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            padding: 2rem;
+            background: var(--secondary-color);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .upload-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .upload-form .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .upload-form label {
+            color: var(--dark-bg);
+            font-weight: 500;
+        }
+
+        .upload-form input[type="text"],
+        .upload-form select {
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            width: 100%;
+        }
+
+        .upload-form input[type="file"] {
+            padding: 0.8rem;
+            border: 2px dashed #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .upload-form input[type="file"]:hover {
+            border-color: var(--gold);
+        }
+
+        .upload-form .cta-button {
+            margin-top: 1rem;
+            width: 100%;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            padding: 1rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            aspect-ratio: 1;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-item img,
+        .gallery-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            padding: 1rem;
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-overlay h3 {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .photo-date {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 0.3rem;
+        }
+
         .fullscreen-btn {
             position: absolute;
             top: 10px;
@@ -313,6 +414,7 @@
             align-items: center;
             justify-content: center;
             transition: background-color 0.3s;
+            z-index: 2;
         }
 
         .fullscreen-btn:hover {
@@ -360,6 +462,77 @@
 
         .close-btn:hover {
             color: #ddd;
+        }
+
+        /* Styles responsifs pour mobile */
+        @media (max-width: 768px) {
+            .upload-section {
+                padding: 1rem;
+                margin: 1rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 0.5rem;
+                padding: 0.5rem;
+            }
+
+            .gallery-overlay {
+                transform: translateY(0);
+                background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+                padding: 0.8rem;
+            }
+
+            .gallery-overlay h3 {
+                font-size: 1rem;
+            }
+
+            .photo-date {
+                font-size: 0.8rem;
+            }
+
+            .fullscreen-btn {
+                width: 35px;
+                height: 35px;
+                top: 5px;
+                right: 5px;
+            }
+
+            .fullscreen-modal {
+                padding: 10px;
+            }
+
+            .close-btn {
+                top: -35px;
+                font-size: 20px;
+            }
+
+            .upload-form input[type="text"],
+            .upload-form select,
+            .upload-form input[type="file"] {
+                font-size: 16px; /* Évite le zoom automatique sur iOS */
+            }
+
+            .cta-button {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
+        }
+
+        /* Styles pour les très petits écrans */
+        @media (max-width: 480px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 0.3rem;
+            }
+
+            .gallery-overlay h3 {
+                font-size: 0.9rem;
+            }
+
+            .photo-date {
+                font-size: 0.7rem;
+            }
         }
     </style>
 </body>
