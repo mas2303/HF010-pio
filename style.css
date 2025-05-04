@@ -472,4 +472,16 @@ body.theme-light .scene-spline-light {
   margin-bottom: 2rem;
 }
 
+.portfolio .projets {
+  align-items: stretch;
+  min-height: 0;
+}
+
+.portfolio .projet {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-self: stretch;
+}
+
 
