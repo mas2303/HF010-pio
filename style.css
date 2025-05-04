@@ -273,16 +273,31 @@ body.theme-light .projet {
     padding: 0.7rem 1rem;
   }
   .container {
-    padding: 0.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
   }
   .section {
-    padding: 70px 0 20px 0;
+    padding-left: 4vw;
+    padding-right: 4vw;
+    box-sizing: border-box;
   }
   h1 {
     font-size: 1.5rem;
   }
   h2 {
     font-size: 1.2rem;
+  }
+  .apropos .container,
+  .portfolio .container {
+    padding-left: 4vw !important;
+    padding-right: 4vw !important;
+    max-width: 96vw !important;
+    box-sizing: border-box !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  .portfolio .projets .projet:last-child {
+    margin-bottom: 1.5rem;
   }
 }
 
@@ -451,6 +466,10 @@ body.theme-light .scene-spline-light {
 .scene-spline [style*="spline-logo"] {
   display: none !important;
   pointer-events: none !important;
+}
+
+.portfolio .projets .projet:last-child {
+  margin-bottom: 2rem;
 }
 
 
