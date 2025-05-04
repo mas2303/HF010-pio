@@ -1,299 +1,228 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Les Pios à l'île Maurice</title>
-    <link rel="icon" type="image/jpeg" href="images/header/logo.jpg">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const departureDate = new Date('2025-07-12T12:00:00').getTime();
-
-            const countdown = setInterval(function() {
-                const now = new Date().getTime();
-                const distance = departureDate - now;
-
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                document.getElementById('days').textContent = String(days).padStart(2, '0');
-                document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-                document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-                document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
-
-                if (distance < 0) {
-                    clearInterval(countdown);
-                    document.querySelector('.countdown-container').innerHTML = '<h2>Nous sommes partis !</h2>';
-                }
-            }, 1000);
-        });
-    </script>
-    <style>
-        .activities li {
-            opacity: 0;
-            transform: translateX(-20px);
-            animation: slideIn 0.8s ease forwards;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .activities li:nth-child(1) { animation-delay: 0.3s; }
-        .activities li:nth-child(2) { animation-delay: 0.6s; }
-        .activities li:nth-child(3) { animation-delay: 0.9s; }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateX(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .activities {
-            list-style: none;
-            padding: 0;
-            margin: 1rem 0;
-        }
-
-        .activities li {
-            margin: 0.5rem 0;
-            padding: 0.8rem 1.2rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-        }
-
-        .activities li:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateX(10px) scale(1.02);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .activities li::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                rgba(255, 255, 255, 0.2),
-                transparent
-            );
-            transition: 0.5s;
-        }
-
-        .activities li:hover::before {
-            left: 100%;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Merenne Samuel - Web Développeur</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.0.49/build/spline-viewer.js"></script>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">
-                <img src="images/header/logo.jpg" alt="Logo">
-                <h1>Les Pio à l'île Maurice</h1>
-            </div>
-            <div class="menu-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <ul class="main-nav">
-                <li><a href="index.html" class="active">Accueil</a></li>
-                <li><a href="equipe.html">Notre Équipe</a></li>
-                <li><a href="photos.html">Photos</a></li>
-            </ul>
-        </nav>
-    </header>
+  <header>
+    <nav class="navbar">
+      <div class="logo">Merenne Samuel</div>
+      <ul class="nav-links">
+        <li><a href="#accueil">Accueil</a></li>
+        <li><a href="#apropos">À propos</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button id="theme-toggle" aria-label="Changer de thème" title="Changer de thème">
+        <span id="theme-icon">
+          <svg id="icon-moon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"></path></svg>
+          <svg id="icon-sun" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        </span>
+      </button>
+    </nav>
+  </header>
 
-    <main>
-        <section class="hero">
-            <div class="hero-content">
-                <h2>Bienvenue dans notre Voyage Extraordinaire vers l'ile Maurice</h2>
-                <p>Une aventure unique à travers les merveilles de l'ile.</p>
-                <a href="#decouvrir" class="cta-button">Destination</a>
-                <a href="#itinerary" class="cta-button">Itinéraire</a>
-                <a href="#highlights" class="cta-button">Points Forts</a>
-            </div>
-        </section>
+  <section id="accueil" class="section accueil">
+    <div class="container">
+      <h1>Bonjour, je suis <span class="accent">Merenne Samuel</span></h1>
+      <h1>Développeur Web</h1>
+      <p>Je conçois des sites web modernes, performants et adaptés à vos besoins.</p>
+      <spline-viewer class="scene-spline" url="https://prod.spline.design/9GzfYZv4UFgC-aQx/scene.splinecode" style="width:100%;height:400px;border-radius:16px;"></spline-viewer>
+      <div class="spline-loading">loading...</div>
+    </div>
+  </section>
 
-        <section class="countdown-section">
-            <h2>Départ dans</h2>
-            <div class="countdown-container">
-                <div class="countdown-item">
-                    <span id="days">00</span>
-                    <span>Jours</span>
-                </div>
-                <div class="countdown-item">
-                    <span id="hours">00</span>
-                    <span>Heures</span>
-                </div>
-                <div class="countdown-item">
-                    <span id="minutes">00</span>
-                    <span>Minutes</span>
-                </div>
-                <div class="countdown-item">
-                    <span id="seconds">00</span>
-                    <span>Secondes</span>
-                </div>
-            </div>
-        </section>
+  <section id="apropos" class="section apropos">
+    <div class="container">
+      <h2>À propos</h2>
+      <p>Passionné par le développement web, je maîtrise HTML, CSS, JavaScript, et divers frameworks modernes.<br>
+      J'ai eu la chance de faire deux ans d'informatique ce qui m'a voulu le statut de technicien informatique, j'ai ensuite suivi un bachelier en programmation de facon autodidacte.
+      </p>
+    </div>
+  </section>
 
-        <section id="decouvrir" class="destination">
-            <h2>Notre Destination</h2>
-            <div class="destination-content">
-                <div class="destination-text">
-                    <p>Nous partons pour un voyage extraordinaire à travers les plus beaux endroits de l'ile. Notre itinéraire nous mènera des plages paradisiaques aux montagnes majestueuses, en passant par des villes historiques et des sites culturels exceptionnels.</p>
-                    <div class="destination-details">
-                        <div class="detail-item">
-                            <i class="fas fa-calendar"></i>
-                            <span>Durée: 15 jours</span>
-                        </div>
-                        <div class="detail-item">
-                            <i class="fas fa-map-marked-alt"></i>
-                            <span>1 pays visité</span>
-                        </div>
-                        <div class="detail-item">
-                            <i class="fas fa-users"></i>
-                            <span>7 participants</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="destination-image">
-                    <img src="images/destination/maurice.jpg" alt="Notre destination">
-                </div>
-            </div>
-        </section>
-
-        <section id="itinerary" class="itinerary">
-            <h2>Notre Itinéraire</h2>
-            <div class="itinerary-grid">
-                <div class="itinerary-card">
-                    <div class="day-number">Jour 1-2</div>
-                    <h3>Décollage de Paris</h3>
-                    <p>escale :</p>
-                    <ul class="activities">
-                        <li>Riyad</li>
-                        <li>Jeddah</li>
-                        <li>Maurice</li>
-                    </ul>
-                </div>
-                <div class="itinerary-card">
-                    <div class="day-number">Jour 3-13</div>
-                    <h3>L'ile ...</h3>
-                    <p>Découverte des sites culturels,plage, montagne ...</p>
-                    <ul class="activities">
-                        <li>Visite de l'ile</li>
-                        <li>Rencontre avec les locaux</li>
-                        <li>Bronzage</li>
-                    </ul>
-                </div>
-                <div class="itinerary-card">
-                    <div class="day-number">Jour 14-15</div>
-                    <h3>Le retour ...</h3>
-                    <p>Escale :</p>
-                    <ul class="activities">
-                        <li>djeddah</li>
-                        <li>Paris</li>
-                        <li>Stembert</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <section id="highlights" class="highlights">
-            <h2>Points Forts du Voyage</h2>
-            <div class="highlights-grid">
-                <div class="highlight-card">
-                    <img src="images/highlights/nature.jpg" alt="Nature Spectaculaire">
-                    <i class="fas fa-mountain"></i>
-                    <h3>Nature Spectaculaire</h3>
-                    <p>Découvrez des paysages à couper le souffle</p>
-                </div>
-                <div class="highlight-card">
-                    <img src="images/highlights/cuisine.jpg" alt="Cuisine Locale">
-                    <i class="fas fa-utensils"></i>
-                    <h3>Cuisine Locale</h3>
-                    <p>Savourez les délices inconnu de vos papilles</p>
-                </div>
-                <div class="highlight-card">
-                    <img src="images/highlights/culture.jpg" alt="Culture Authentique">
-                    <i class="fas fa-users"></i>
-                    <h3>Culture Authentique</h3>
-                    <p>Immergez-vous dans les traditions locales</p>
-                </div>
-                <div class="highlight-card">
-                    <img src="images/highlights/photos.jpg" alt="Photos Uniques">
-                    <i class="fas fa-camera"></i>
-                    <h3>Photos Uniques</h3>
-                    <p>Capturez des moments inoubliables</p>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>les pios à l'ile Maurice</h3>
-                <p>Une aventure inoubliable vous attend</p>
-            </div>
-            <div class="footer-section">
-                <h3>Suivez-nous</h3>
-                <div class="social-links">
-                    <a href="https://www.facebook.com/PionnierDeStembert"><i class="fab fa-facebook"></i></a>
-                </div>
-            </div>
+  <section id="portfolio" class="section portfolio">
+    <div class="container">
+      <h2>Portfolio</h2>
+      <div class="projets">
+        <div class="projet">
+          <h3>Pionnier de Stembert</h3>
+          <p>Un site web permetant le partage d'informatioon de la part des pionnier de Stembert contenant une gallerie photo partagée. 
+            <p> le lien : <a href="https://www.lespionniersdestembert.be/index.html">https://pionnier-de-stembert.be</a></p></p>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 les pios à l'ile Maurice. Tous droits réservés.</p>
+        <div class="projet">
+          <h3>Electricop</h3>
+          <p>Un site web accompagnant un électricien indépendant dans son entreprise.</p>
+          <p> le lien : <a href="https://www.electricop.be/index.html">https://electricop.be</a></p></p>
         </div>
-    </footer>
+        <!-- Ajoute d'autres projets ici -->
+      </div>
+    </div>
+  </section>
 
-    <script>
-        const menuToggle = document.querySelector('.menu-toggle');
-        const mainNav = document.querySelector('.main-nav');
-        let isMenuOpen = false;
+  <section id="contact" class="section contact">
+    <div class="container">
+      <h2>Contact</h2>
+      <p>Tu veux discuter d'un projet ou en savoir plus ?</p>
+      <div class="fiche-contact">
+        <form class="contact-form" autocomplete="off" action="mailto:merennesamuel@hotmail.be" method="post" enctype="text/plain">
+          <div class="form-group">
+            <label for="nom">Nom</label>
+            <input type="text" id="nom" name="nom" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn-envoyer">Envoyer</button>
+          <div class="form-message" style="display:none;"></div>
+        </form>
+      </div>
+      <ul class="contact-infos">
+        <li>Email : <a href="mailto:merennesamuel@hotmail.be">merennesamuel@hotmail.be</a></li>
+        <li>LinkedIn : <a href="#" target="_blank">TonProfil</a></li>
+        <!-- Ajoute d'autres réseaux si besoin -->
+      </ul>
+    </div>
+  </section>
 
-        menuToggle.addEventListener('click', (e) => {
-            e.stopPropagation();
-            isMenuOpen = !isMenuOpen;
-            menuToggle.classList.toggle('active');
-            mainNav.classList.toggle('active');
-        });
+  <div id="mouse-trail"></div>
+  <script>
 
-        document.querySelectorAll('.main-nav a').forEach(link => {
-            link.addEventListener('click', () => {
-                isMenuOpen = false;
-                menuToggle.classList.remove('active');
-                mainNav.classList.remove('active');
-            });
-        });
+   
+    // Apparition des sections au scroll
+    const sections = document.querySelectorAll('.section');
+    const revealSections = () => {
+      const trigger = window.innerHeight * 0.85;
+      sections.forEach((section, idx) => {
+        const rect = section.getBoundingClientRect();
+        if(rect.top < trigger && rect.bottom > 0) {
+          section.classList.add('visible');
+          section.classList.add('delay-' + (idx+1));
+        } else {
+          section.classList.remove('visible');
+          section.classList.remove('delay-' + (idx+1));
+        }
+      });
+    };
+    window.addEventListener('scroll', revealSections);
+    window.addEventListener('load', revealSections);
 
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('nav') && isMenuOpen) {
-                isMenuOpen = false;
-                menuToggle.classList.remove('active');
-                mainNav.classList.remove('active');
-            }
-        });
+    // Effet sur le header au scroll
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+      if(window.scrollY > 40) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
 
-        mainNav.addEventListener('click', (e) => {
-            e.stopPropagation();
-        });
-    </script>
+    // Traînée discrète derrière la souris
+    const trailCount = 8;
+    const trail = [];
+    const trailDiv = document.getElementById('mouse-trail');
+    for(let i=0; i<trailCount; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'trail-dot';
+      trailDiv.appendChild(dot);
+      trail.push({el: dot, x: window.innerWidth/2, y: window.innerHeight/2});
+    }
+    let mouse = {x: window.innerWidth/2, y: window.innerHeight/2};
+    document.addEventListener('mousemove', e => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+      trailDiv.style.opacity = 1;
+    });
+    document.addEventListener('mouseleave', () => {
+      trailDiv.style.opacity = 0;
+    });
+    function animateTrail() {
+      let x = mouse.x, y = mouse.y;
+      for(let i=0; i<trail.length; i++) {
+        const dot = trail[i];
+        dot.x += (x - dot.x) * 0.25;
+        dot.y += (y - dot.y) * 0.25;
+        dot.el.style.transform = `translate(${dot.x-6}px, ${dot.y-6}px)`;
+        dot.el.style.opacity = (1 - i/trail.length) * 0.5 + 0.2;
+        x = dot.x;
+        y = dot.y;
+      }
+      requestAnimationFrame(animateTrail);
+    }
+    animateTrail();
+
+    // Thème clair/sombre
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    function setTheme(theme) {
+      document.body.classList.toggle('theme-light', theme === 'light');
+      document.body.classList.toggle('theme-dark', theme === 'dark');
+      document.getElementById('icon-sun').style.display = theme === 'light' ? 'inline' : 'none';
+      document.getElementById('icon-moon').style.display = theme === 'dark' ? 'inline' : 'none';
+      localStorage.setItem('theme', theme);
+    }
+    // Initialisation
+    const savedTheme = localStorage.getItem('theme');
+    if(savedTheme) setTheme(savedTheme);
+    else setTheme('light');
+    themeToggle.addEventListener('click', () => {
+      const isLight = document.body.classList.contains('theme-light');
+      setTheme(isLight ? 'dark' : 'light');
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const tryRemoveWatermark = () => {
+        const viewer = document.querySelector('.scene-spline');
+        if (!viewer) return;
+        if (!document.body.classList.contains('theme-dark')) return;
+        const shadow = viewer.shadowRoot;
+        if (shadow) {
+          const links = shadow.querySelectorAll('a, div');
+          links.forEach(link => {
+            if (link.href && link.href.includes('spline.design')) link.remove();
+            if (link.textContent && link.textContent.toLowerCase().includes('spline')) link.remove();
+          });
+        }
+      };
+      for (let i = 0; i < 10; i++) {
+        setTimeout(tryRemoveWatermark, 500 * i);
+      }
+    });
+
+    // Tracking souris global pour la scène claire
+    function forwardMouseToSplineViewer(e) {
+      const viewer = document.querySelector('.scene-spline-light');
+      if (!viewer) return;
+      if (!document.body.classList.contains('theme-light')) return;
+      const shadow = viewer.shadowRoot;
+      if (!shadow) return;
+      // Calculer la position relative au viewer
+      const rect = viewer.getBoundingClientRect();
+      // On mappe la souris sur le viewer même si elle est hors cadre
+      const x = Math.max(0, Math.min(rect.width, e.clientX - rect.left));
+      const y = Math.max(0, Math.min(rect.height, e.clientY - rect.top));
+      // Créer un event pointermove
+      const event = new PointerEvent('pointermove', {
+        clientX: x,
+        clientY: y,
+        bubbles: true,
+        composed: true
+      });
+      // Envoyer l'event sur le canvas interne
+      const canvas = shadow.querySelector('canvas');
+      if (canvas) canvas.dispatchEvent(event);
+    }
+    // Activer le tracking seulement en mode clair
+    document.addEventListener('mousemove', forwardMouseToSplineViewer);
+  </script>
 </body>
-</html> 
+</html>

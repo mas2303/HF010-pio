@@ -1,0 +1,456 @@
+:root {
+  --color-bg: #181c24;
+  --color-bg-container: #23283aee;
+  --color-text: #f1f1f1;
+  --color-title: #ffb300;
+  --color-accent: #ffffff;
+  --color-link: #ffb300;
+  --color-link-hover: #f472b6;
+  --color-shadow: #0003;
+  --color-form-bg: #23283a;
+  --color-form-border: #333a;
+  --color-btn-bg: linear-gradient(90deg, #ffb300, #f472b6);
+  --color-btn-bg-hover: linear-gradient(90deg, #f472b6, #ffb300);
+  --color-btn-text: #181c24;
+}
+
+body.theme-light {
+  --color-bg: #f9fafb;
+  --color-bg-container: #f4f6fb;
+  --color-text: #111111;
+  --color-title: #111111;
+  --color-accent: #ffb300;
+  --color-link: #635f5f;
+  --color-link-hover: #ffb300;
+  --color-shadow: #cecaca;
+  --color-form-bg: #fff;
+  --color-form-border: #d1d5db;
+  --color-btn-bg: linear-gradient(90deg, #9ca3b4, #ffd166);
+  --color-btn-bg-hover: linear-gradient(90deg, #ffd166, #6b6e75);
+  --color-btn-text: #9b9b9b;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+header {
+  width: 100%;
+  background: var(--color-bg-container);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px var(--color-shadow);
+  backdrop-filter: blur(6px);
+}
+
+header.scrolled {
+  background: var(--color-bg-container);
+  box-shadow: 0 4px 16px var(--color-shadow);
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+.navbar {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--color-title);
+  letter-spacing: 2px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  color: var(--color-text);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+  position: relative;
+}
+body.theme-light .nav-links a {
+  color: #ffb300;
+}
+
+.nav-links a::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background: var(--color-title);
+  transition: width 0.3s;
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+}
+
+.nav-links a:hover {
+  color: var(--color-title);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+@keyframes sectionIn {
+  0% {
+    opacity: 0;
+    transform: translateY(60px) scale(0.95) rotateZ(-2deg);
+    filter: blur(8px);
+  }
+  60% {
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotateZ(0deg);
+    filter: blur(0);
+  }
+}
+
+.section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 0 40px 0;
+  opacity: 0;
+  transform: translateY(60px) scale(0.95) rotateZ(-2deg);
+  filter: blur(8px);
+  transition: none;
+}
+
+.section.visible {
+  animation: sectionIn 0.5s cubic-bezier(.4,0,.2,1) forwards;
+}
+
+.section.visible.delay-1 { animation-delay: 0.1s; }
+.section.visible.delay-2 { animation-delay: 0.2s; }
+.section.visible.delay-3 { animation-delay: 0.3s; }
+.section.visible.delay-4 { animation-delay: 0.4s; }
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: var(--color-bg-container);
+  border-radius: 18px;
+  box-shadow: 0 4px 32px var(--color-shadow);
+}
+
+h1, h2, h3 {
+  color: var(--color-title);
+  margin-top: 0;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 1.2rem;
+}
+
+h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: #ffb300;
+}
+
+body.theme-light h2 {
+  color: #ffb300;
+}
+
+body.theme-light h3 {
+  color: #ffb300;
+}
+body.theme-light p {
+  color: #000000;
+}
+
+body.theme-dark h3 {
+  color: var(--color-accent);
+}
+
+.accent {
+  color: var(--color-accent);
+}
+
+.apropos p, .portfolio p, .contact p {
+  color: #e0e0e0;
+  font-size: 1.1rem;
+}
+
+.projets {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.projet {
+  background: #181c24;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 12px #0002;
+}
+
+body.theme-light .projet {
+  background: #ebebeb;
+}
+
+.projet h3 {
+  color: #6ee7ff;
+}
+
+.projet p {
+  color: #bdbdbd;
+}
+
+.projet p a {
+  color: var(--color-link);
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.projet p a:hover {
+  color: var(--color-link-hover);
+}
+
+.contact-infos {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0 0;
+}
+
+.contact-infos li {
+  margin-bottom: 0.7rem;
+  font-size: 1.1rem;
+}
+
+.contact-infos a {
+  color: var(--color-link);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.contact-infos a:hover {
+  color: var(--color-link-hover);
+}
+
+@media (max-width: 900px) {
+  .container {
+    padding: 1rem;
+  }
+  .projets {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0.7rem 1rem;
+  }
+  .container {
+    padding: 0.5rem;
+  }
+  .section {
+    padding: 70px 0 20px 0;
+  }
+  h1 {
+    font-size: 1.5rem;
+  }
+  h2 {
+    font-size: 1.2rem;
+  }
+}
+
+.fiche-contact {
+  background: var(--color-bg);
+  border-radius: 14px;
+  box-shadow: 0 2px 16px var(--color-shadow);
+  padding: 2rem 1.5rem;
+  margin: 2rem auto 2.5rem auto;
+  max-width: 420px;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-group label {
+  color: var(--color-title);
+  font-weight: 500;
+  margin-bottom: 0.2rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+  background: var(--color-form-bg);
+  border: 1.5px solid var(--color-form-border);
+  color: var(--color-text);
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  transition: border 0.2s, box-shadow 0.2s;
+  resize: none;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border: 1.5px solid var(--color-title);
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-title)33;
+}
+
+.btn-envoyer {
+  background: var(--color-btn-bg);
+  color: var(--color-btn-text);
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  padding: 0.9rem 0;
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: background 0.2s, color 0.2s, transform 0.15s;
+}
+
+.btn-envoyer:hover {
+  background: var(--color-btn-bg-hover);
+  color: var(--color-text);
+  transform: scale(1.04);
+}
+
+.form-message {
+  margin-top: 1rem;
+  color: #6ee7ff;
+  font-weight: 500;
+  text-align: center;
+}
+
+#mouse-halo {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100px;
+  height: 100px;
+  pointer-events: none;
+  border-radius: 50%;
+  background: radial-gradient(circle, #6ee7ff55 0%, #f472b633 60%, transparent 100%);
+  box-shadow: 0 0 32px 16px #6ee7ff33;
+  filter: blur(2px);
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 9999;
+}
+
+#theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.7rem;
+  margin-left: 1.5rem;
+  color: var(--color-title);
+  transition: color 0.2s, transform 0.2s;
+  outline: none;
+  display: flex;
+  align-items: center;
+}
+#theme-toggle:hover {
+  color: var(--color-accent);
+  transform: scale(1.15) rotate(-10deg);
+}
+#theme-icon {
+  pointer-events: none;
+}
+
+#mouse-trail {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+
+.trail-dot {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #2563ebcc 0%, #ffb30055 80%, transparent 100%);
+  box-shadow: 0 0 8px 2px #2563eb44;
+  pointer-events: none;
+  will-change: transform, opacity;
+  transition: background 0.2s;
+  opacity: 1;
+}
+
+body.theme-light .trail-dot {
+  background: radial-gradient(circle, #ffb300cc 0%, #ffb30055 80%, transparent 100%);
+  box-shadow: 0 0 8px 2px #ffb30044;
+}
+
+/* Masquer le watermark Spline via ::part (recommandé par Spline) */
+spline-viewer::part(watermark) {
+  display: none !important;
+}
+
+body.theme-light .scene-spline {
+  display: none !important;
+}
+body.theme-dark .scene-spline {
+  display: block !important;
+}
+body.theme-dark .scene-spline-light {
+  display: none !important;
+}
+body.theme-light .scene-spline-light {
+  display: block !important;
+}
+
+.spline-loading {
+  display: none !important;
+}
+
+.scene-spline::part(watermark),
+.scene-spline a[href*="spline.design"],
+.scene-spline [style*="spline-logo"] {
+  display: none !important;
+  pointer-events: none !important;
+}
+
+
