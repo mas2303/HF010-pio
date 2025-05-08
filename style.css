@@ -212,6 +212,10 @@ body.theme-dark h3 {
   border-radius: 12px;
   padding: 1.5rem;
   box-shadow: 0 2px 12px #0002;
+  transition: transform 0.3s;
+}
+.projet:hover {
+  transform: scale(1.05);
 }
 
 body.theme-light .projet {
